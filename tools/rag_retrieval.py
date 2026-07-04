@@ -18,12 +18,9 @@ def embed_chunks(chunks):
 DOCS_FOLDER = "docs"
 
 def load_and_chunk_documents(chunk_size=500, overlap=50):
-    """
-    Loads all .md files from the docs folder and splits them into
-    overlapping chunks of roughly chunk_size characters each.
-    """
     chunks = []
-    file_paths = glob.glob(os.path.join(DOCS_FOLDER, "*.md"))
+    docs_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "docs"))
+    file_paths = glob.glob(os.path.join(docs_path, "*.md"))
 
     for path in file_paths:
         with open(path, "r", encoding="utf-8") as f:
