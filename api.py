@@ -7,12 +7,14 @@ from router import ask_with_routing
 
 app = FastAPI(title="Multi-Tool Agent API")
 
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 class QuestionRequest(BaseModel):
     question: str
 
 @app.get("/")
 def serve_frontend():
-    return {"message": "Multi-Tool Agent API is running. POST to /ask to query the agent."}
+    return FileResponse("static/index.html")
 
 @app.post("/ask")
 def ask(request: QuestionRequest):
