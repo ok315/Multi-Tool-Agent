@@ -16,6 +16,9 @@ def calculator(expression):
     try:
         result = eval(cleaned, {"__builtins__": {}}, {})
         return str(result)
+    except ZeroDivisionError:
+        # Return a clear, user‑friendly message for division by zero.
+        return "Calculator error: division by zero"
     except Exception as e:
         return f"Calculator error: could not evaluate '{expression}': {str(e)}"
 
