@@ -14,9 +14,14 @@ def calculator(expression):
         return f"Calculator error: expression contains disallowed characters: '{expression}'"
 
     try:
+        # Evaluate the arithmetic expression in a restricted namespace.
         result = eval(cleaned, {"__builtins__": {}}, {})
         return str(result)
+    except ZeroDivisionError:
+        # Provide a clear, user‑friendly message for division‑by‑zero errors.
+        return f"Calculator error: division by zero in '{expression}'"
     except Exception as e:
+        # Catch all other errors and report them without exposing a traceback.
         return f"Calculator error: could not evaluate '{expression}': {str(e)}"
 
 
